@@ -21,10 +21,10 @@ int main(void)
 		read = getline(&line, &len, stdin);
 
 		write(STDOUT_FILENO, line, read);
-
+		no_nl(line);
 		args = parser(line);
 
-		execve("/bin/ls", args, NULL);
+		execve(args[0], args, NULL);
 	}
 
 	free(line);
