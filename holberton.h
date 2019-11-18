@@ -11,5 +11,5 @@
 
 char *_strdup(char *str);
 char **parser(char *l);
-
+void no_nl(char *l);
 #endif
