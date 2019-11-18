@@ -78,3 +78,25 @@ char **parser(char *l)
 
 	return (args);
 }
+
+/**
+ * no_nl - removes the new line with the NULL character
+ * @l: the line
+ * Return: nothing
+ */
+void no_nl(char *l)
+{
+
+	int i = 0;
+
+	while (l[i])
+	{
+		if (l[i] == '\n')
+		{
+			l[i] = '\0';
+			return;
+		}
+
+		i++;
+	}
+}
