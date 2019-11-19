@@ -1,0 +1,17 @@
+.TH Shell 1 "18 November 2019" "1.0" "Simple Shell Manual"
+
+.SH NAME
+.B simple_shell - command interpreter (shell)
+
+.SH SYNOPSIS
+simple_shell [command] [file]
+
+.SH DESCRIPTION
+The simple_shell is a command that reads line
+
+.SH BUGS
+No known bugs
+
+
+.SH AUTHORS
+.B Ariana Bibiano, Erika Caoili, and Robert Deprizio
