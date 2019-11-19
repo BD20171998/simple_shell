@@ -13,6 +13,15 @@
 #include <unistd.h>
 
 char *_strdup(char *str);
+
 char **parser(char *l);
+
 void no_nl(char *l);
+
+int _strlen(char *s);
+
+int _putchar(char c);
+
+void print_str(char *s);
+
 #endif
