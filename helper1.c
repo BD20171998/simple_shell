@@ -100,3 +100,25 @@ void no_nl(char *l)
 		i++;
 	}
 }
+
+
+/**
+ * print_str - prints string
+ * @s: string to be printed
+ * Return: void
+ */
+void print_str(char *s)
+{
+        int i, wc, bytes;
+        char *buffer;
+
+        for (i = 0; s[i] != '\0'; i++)
+                ;
+
+        bytes = i;
+
+        wc = write(STDOUT_FILENO, s, bytes);
+        if (wc == NULL)
+                return;
+
+}
