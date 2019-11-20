@@ -109,8 +109,7 @@ void no_nl(char *l)
  */
 void print_str(char *s)
 {
-        int i, wc, bytes;
-        char *buffer;
+        int i, bytes, wc;
 
         for (i = 0; s[i] != '\0'; i++)
                 ;
@@ -118,7 +117,25 @@ void print_str(char *s)
         bytes = i;
 
         wc = write(STDOUT_FILENO, s, bytes);
-        if (wc == NULL)
+        if (wc == EOF)
                 return;
 
+}
+
+/**
+ * _strcat - concatenates two strings
+ * @dest: string 1
+ * @src: string 2
+ * Return: concatenated string with overwritten null byte
+ */
+char *_strcat(char *dest, char *src)
+{
+	int len = _strlen(dest);
+	int i;
+
+	for (i = 0; src[i] != '\0'; i++)
+		dest[len + i] = src[i];
+	dest[len + i] = '\0';
+
+	return (dest);
 }
