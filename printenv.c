@@ -20,7 +20,7 @@ int printenv(char **env)
 }
 
 /**
- * _printf - print a character
+ * _printf - print a string
  * @str: the string
  */
 void_printf(char *str)
