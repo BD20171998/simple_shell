@@ -23,7 +23,7 @@ void free_grid(char **grid, int height)
  * main - Program that is simple UNIX command interpreter
  * Return: 0
  */
-
+extern char **environ;
 int main(void)
 {
 	char *prompt = "##--->";
@@ -34,7 +34,7 @@ int main(void)
 	size_t len = 0;
 	ssize_t read;
 
-	do{ 
+	do {
 
 			write(STDOUT_FILENO, prompt, 6);
 			read = getline(&line, &len, stdin);
@@ -43,16 +43,16 @@ int main(void)
 			no_nl(line);
 			args = parser(line);
 
-			for (i = 0;args[i];i++)
+			for (i = 0; args[i]; i++)
 				++arg_num;
 
 			if (fork() == 0)
-				execve(args[0], args, NULL);
+			execve(_path(args[0], environ), args, NULL);
 			else
-				wait(NULL);
+			wait(NULL);
 
 
-	}while(read != EOF);
+	} while(read != EOF);
 
 	free(line);
 	free_grid(args,arg_num);

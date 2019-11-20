@@ -24,4 +24,10 @@ int _putchar(char c);
 
 void print_str(char *s);
 
+char *_path(char *first, char **env);
+
+char *_strcat(char *dest, char *src);
+
+int _strcmp(char *s1, char *s2);
+
 #endif
