@@ -1,4 +1,4 @@
-.TH Shell 1 "18 November 2019" "1.0" "Simple Shell Manual"
+.TH Shell 1 "20 November 2019" "1.0" "Simple Shell Manual"
 
 .SH NAME
 .B simple_shell - command interpreter (shell)
@@ -7,7 +7,23 @@
 simple_shell [command] [file]
 
 .SH DESCRIPTION
-The simple_shell is a command that reads line
+The simple_shell is a simple UNIX command interpreter built in C.
+
+A command is a sequence of non blank words separated by a blank space. The first
+word specifies the name of the command to be executed and subsequent arguments
+are considered to be flags associated with the command.
+
+.SH SPECIAL COMMANDS
+The following commands are executed in the shell as builtins
+
+.B exit
+
+	Exits the shell
+
+.B env
+
+	Prints the variables from the current environment
+
 
 .SH BUGS
 No known bugs
