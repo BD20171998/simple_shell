@@ -12,7 +12,7 @@ int printenv(char **env)
 	while (env[i] != NULL)
 	{
 		print_str(env[i]);
-		_putchar(\n);
+		_putchar('\n');
 	}
 
 	return (0);
