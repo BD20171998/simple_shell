@@ -36,7 +36,13 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 				exit(EXIT_SUCCESS);
 
 			status = _path(args[0], args, env);
-			printf("%i",status);
+			if (status == 2)
+			{
+				if (access(args[0], X_OK) == 0)
+					execve(args[0], args, NULL);
+				else
+					wait (NULL);
+			}
 	}
 
 	free(line);
