@@ -75,7 +75,7 @@ char **parser(char *l)
 	}
 
 	args[i] = NULL;
-
+	free(linecopy);
 	return (args);
 }
 
