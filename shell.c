@@ -24,7 +24,7 @@ void free_grid(char **grid, int height)
  * Return: 0
  */
 extern char **environ;
-int main(void)
+int main(int *argc __attribute__((unused)),char **argv __attribute__((unused)), char **env) 
 {
 	char *prompt = "##--->";
 	char *line = NULL;
@@ -52,15 +52,6 @@ int main(void)
 
 			if(_strcmp(args[0],"exit") == 0)
 				exit(EXIT_SUCCESS);
-
-			if (fork() == 0)
-			{
-				execve(args[0], args, NULL);
-				exit(EXIT_SUCCESS);
-			}
-
-			else
-				wait(NULL);
 	}
 
 	free(line);
