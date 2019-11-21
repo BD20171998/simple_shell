@@ -24,7 +24,11 @@ int _putchar(char c);
 
 void print_str(char *s);
 
-char *_path(char *first, char **env);
+char *cpy_env(char **env);
+
+char *_strcpy(char *dest, char *src);
+
+void _path(char *first, char **input, char **env);
 
 char *_strcat(char *dest, char *src);
 
