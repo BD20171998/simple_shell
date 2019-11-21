@@ -28,7 +28,7 @@ char *cpy_env(char **env);
 
 char *_strcpy(char *dest, char *src);
 
-void _path(char *first, char **input, char **env);
+int _path(char *first, char **input, char **env);
 
 char *_strcat(char *dest, char *src);
 
