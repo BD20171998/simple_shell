@@ -44,15 +44,14 @@ int main(void)
 			args = parser(line);
 
 			for (i = 0; args[i]; i++)
-				++arg_num;
-
-			if (fork() == 0)
-			execve(_path(args[0], environ), args, NULL);
+				arg_num++;
+			/*	if (fork() == 0)
+				execve(_path(args[0], environ), args, NULL);
 			else
-			wait(NULL);
+			wait(NULL); */
+			_path(args[0], args, environ);
 
-
-	} while(read != EOF);
+	} while (read != EOF);
 
 	free(line);
 	free_grid(args,arg_num);
