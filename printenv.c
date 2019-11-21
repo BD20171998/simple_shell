@@ -8,28 +8,12 @@
 int printenv(char **env)
 {
 	unsigned int i = 0;
-	char *buffer;
 
 	while (env[i] != NULL)
 	{
-		_printf(env[i]);
-			_putchar(\n);
+		print_str(env[i]);
+		_putchar(\n);
 	}
 
 	return (0);
-}
-
-/**
- * _printf - print a string
- * @str: the string
- */
-void_printf(char *str)
-{
-	int i = 0;
-
-	for (; str[i]; i++)
-	{
-		_putchar(str[i]);
-	}
-
 }
