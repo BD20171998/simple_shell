@@ -40,3 +40,19 @@ int _putchar(char c)
 {
         return (write(1, &c, 1));
 }
+
+
+/**
+ * _strcpy - copies string to another string
+ * @dest: string 1
+ * @src: string 2
+ * Return: string copy
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int a;
+
+	for (a = 0; a <= _strlen(src); a++)
+		dest[a] = src[a];
+	return (dest);
+}
