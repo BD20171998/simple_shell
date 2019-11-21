@@ -5,43 +5,45 @@
  * @env: environment
  * Return: path
  */
-char *_path(char *first, char **env)
+void _path(char *first, char **input, char **env)
 {
-	int i, j, k;
-	char *env_cpy;
-	char *left, *right, *temp, *tok_len, *new;
+	int token_len, first_len;
+	char *temp, *left, *right, *token;
+	char *environc = NULL, *new = NULL;
 
-	for (i = 0; env[i] != '\0'; i++)
+	environc = cpy_env(env);
+
+	left = strtok(environc, "=");
+	temp = strtok(NULL, "=");
+
+	if (_strcmp(left, "PATH") == 0)
 	{
-		env_cpy = _strdup(env[i]);
+		right = strtok(temp, ":");
+		while (right)
+		{
+			token = right;
+			token_len = _strlen(token);
+			first_len = _strlen(first);
 
-		left = strtok(env_cpy, "=");
-
-		right = strtok(NULL, "=");
-
-		if (_strcmp(left, "PATH") == 0)
-	        {
-			temp = strtok(right, ":");
-			while (temp) /* loops thru right value*/
+			new = malloc((token_len + first_len + 2) * sizeof(char));
+			if (new == NULL)
+				return;
+			_strcat(new, right);
+			_strcat(new, "/");
+			_strcat(new, first);
+			_strcat(new, "\0");
+			if (access(new, X_OK) == 0) /*Free the copy of env*/
 			{
-				tok_len = temp;
-				for (j = 0; tok_len[j] != '\0'; j++)  /* loops thru token*/
-					;
-				for (k = 0; first[k] != '\0'; k++)
-					;
-				new = malloc((j + k + 2) * sizeof(char)); /* 2: slash & null */
-				if (new == NULL)
-					return (NULL);
-				_strcat(new, first);
-				_strcat(new, "/");
-				_strcat(new, first);
-				_strcat(new, "\0");
-				if (access(new, X_OK) == 0)
-					return (new);
-				temp = strtok(NULL, ":");
+				if (fork() == 0)
+					execve(new, input, NULL);
+				else
+					wait(NULL);
+				free(environc);
 				free(new);
 			}
+			right = strtok(NULL, ":");
+			free(new);
 		}
 	}
-	return (NULL);
+	exit(1);
 }
