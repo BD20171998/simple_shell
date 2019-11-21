@@ -13,6 +13,7 @@ int printenv(char **env)
 	{
 		print_str(env[i]);
 		_putchar('\n');
+		i++;
 	}
 
 	return (0);
