@@ -34,24 +34,34 @@ int main(void)
 	size_t len = 0;
 	ssize_t read;
 
-	do {
-
+	while(read != EOF)
+	{
 			write(STDOUT_FILENO, prompt, 6);
 			read = getline(&line, &len, stdin);
+			if (read == EOF)
+				exit(EXIT_SUCCESS);
 
 			write(STDOUT_FILENO, line, read);
+
 			no_nl(line);
+
 			args = parser(line);
 
 			for (i = 0; args[i]; i++)
 				arg_num++;
-			/*	if (fork() == 0)
-				execve(_path(args[0], environ), args, NULL);
-			else
-			wait(NULL); */
-			_path(args[0], args, environ);
 
-	} while (read != EOF);
+			if(_strcmp(args[0],"exit") == 0)
+				exit(EXIT_SUCCESS);
+
+			if (fork() == 0)
+			{
+				execve(args[0], args, NULL);
+				exit(EXIT_SUCCESS);
+			}
+
+			else
+				wait(NULL);
+	}
 
 	free(line);
 	free_grid(args,arg_num);
