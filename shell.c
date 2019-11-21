@@ -6,13 +6,13 @@
  * Return: 0
  */
 extern char **environ;
-int main(int *argc __attribute__((unused)),char **argv __attribute__((unused)), char **env) 
+int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), char **env) 
 {
 	char *prompt = "##--->";
 	char *line = NULL;
 
 	char **args;
-	int arg_num = 0, i;
+	int arg_num = 0, i, status;
 	size_t len = 0;
 	ssize_t read;
 
@@ -34,6 +34,9 @@ int main(int *argc __attribute__((unused)),char **argv __attribute__((unused)), 
 
 			if(_strcmp(args[0],"exit") == 0)
 				exit(EXIT_SUCCESS);
+
+			status = _path(args[0], args, env);
+			printf("%i",status);
 	}
 
 	free(line);
