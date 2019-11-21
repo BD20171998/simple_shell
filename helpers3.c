@@ -1,4 +1,6 @@
-**
+#include "holberton.h"
+
+/**
  * free_grid - function that frees a 2 dimensional grid of int pointers
  * @grid: Char double pointer to be freed
  * @height: int for height of 2D array to be passed
