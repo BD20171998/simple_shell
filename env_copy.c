@@ -20,5 +20,5 @@ char *cpy_env(char **env)
 
 	_strcpy(env_cpy, env[i]);
 
-	return (0);
+	return (env_cpy);
 }
