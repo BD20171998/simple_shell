@@ -7,41 +7,47 @@
  */
 int _path(char *first, char **input, char **env)
 {
-	int token_len, first_len;
+	int token_len, first_len, i;
 	char *temp, *left, *right, *token;
 	char *new = NULL;
 
-	left = strtok(env, "=");
-	temp = strtok(NULL, "=");
-
-	if (_strcmp(left, "PATH") == 0)
+	for (i = 0;env[i] !='\0'; i++)
 	{
-		right = strtok(temp, ":");
-		while (right)
-		{
-			token = right;
-			token_len = _strlen(token);
-			first_len = _strlen(first);
+		left = strtok(env[i], "=");
+		temp = strtok(NULL, "=");
 
-			new = malloc((token_len + first_len + 2) *sizeof(char));
-			if (new == NULL)
-				return;
-			_strcat(new, right);
-			_strcat(new, "/");
-			_strcat(new, first);
-			_strcat(new, "\0");
-			if (access(new, X_OK) == 0)
+		if (_strcmp(left, "PATH") == 0)
+		{
+			right = strtok(temp, ":");
+			while (right)
 			{
-				if (fork() == 0)
-					execve(new, input, NULL);
-				else
-					wait(NULL);
+				token = right;
+				token_len = _strlen(token);
+				first_len = _strlen(first);
+
+				new = malloc((token_len + first_len + 2) *
+					     sizeof(char));
+				if (new == NULL)
+					return (EOF);
+				_strcat(new, right);
+				_strcat(new, "/");
+				_strcat(new, first);
+				_strcat(new, "\0");
+				if (access(new, X_OK) == 0)
+				{
+					if (fork() == 0)
+						execve(new, input, NULL);
+					else
+						wait(NULL);
+					free(new);
+					return (0);
+				}
+				right = strtok(NULL, ":");
 				free(new);
-				return (0);
 			}
-			right = strtok(NULL, ":");
-			free(new);
 		}
+
 	}
+	return (2);
 
 }
