@@ -41,3 +41,5 @@ the course of its run and exits.
 
 The perfect README has a flow chart, a synopsis, requirements, and functions with
 defintions.
+
+I made changes.
