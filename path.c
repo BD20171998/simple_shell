@@ -7,7 +7,7 @@
  */
 int _path(char *first, char **input, char **env)
 {
-	int token_len, first_len, i, exec;
+	int token_len, first_len, i;
 	char *temp, *left, *right, *token;
 	char *new = NULL, *envcopy = NULL;
 
@@ -38,12 +38,12 @@ int _path(char *first, char **input, char **env)
 				if (access(new, X_OK) == 0)
 				{
 					if (fork() == 0)
-						exec = execve(new, input, NULL);
+						execve(new, input, NULL);
 					else
 						wait(NULL);
 					free(new);
 					free(envcopy);
-					return (exec);
+					return (0);
 				}
 				right = strtok(NULL, ":");
 				free(new);
