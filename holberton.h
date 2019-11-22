@@ -36,5 +36,6 @@ int _strcmp(char *s1, char *s2);
 
 void free_grid(char **grid, int height);
 
-int printenv(**char);
+int printenv(char **env);
+
 #endif
