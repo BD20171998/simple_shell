@@ -30,6 +30,7 @@ int _path(char *first, char **input, char **env)
 					     sizeof(char));
 				if (new == NULL)
 					return (EOF);
+				new[0] = '\0';
 				_strcat(new, right);
 				_strcat(new, "/");
 				_strcat(new, first);
@@ -41,13 +42,14 @@ int _path(char *first, char **input, char **env)
 					else
 						wait(NULL);
 					free(new);
+					free(envcopy);
 					return (exec);
 				}
 				right = strtok(NULL, ":");
 				free(new);
 			}
 		}
-
+		free(envcopy);
 	}
 	return (2);
 }
