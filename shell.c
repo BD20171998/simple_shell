@@ -11,10 +11,10 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 	char *prompt = "##--->";
 	char *line = NULL;
 
-	char **args;
-	int arg_num = 0, i, status;
+	char **args = NULL;
+	int arg_num = 0, i = 0, status = 0;
 	size_t len = 0;
-	ssize_t read;
+	ssize_t read = 0;
 
 	while(read != EOF)
 	{
@@ -34,6 +34,8 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 
 			if(_strcmp(args[0],"exit") == 0)
 				exit(EXIT_SUCCESS);
+			if(_strcmp(args[0], "env") == 0)
+				printenv(env);
 
 			status = _path(args[0], args, env);
 			if (status == 2)
@@ -43,10 +45,9 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 				else
 					wait (NULL);
 			}
+			free_grid(args, arg_num);
+			free(args);
 	}
-
-	free(line);
-	free_grid(args,arg_num);
 
 	return (0);
 }
