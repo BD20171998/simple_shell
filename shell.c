@@ -23,8 +23,6 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 			if (read == EOF)
 				exit(EXIT_SUCCESS);
 
-			write(STDOUT_FILENO, line, read);
-
 			no_nl(line);
 
 			args = parser(line);
