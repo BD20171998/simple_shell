@@ -16,3 +16,19 @@ void free_grid(char **grid, int height)
 
 	free(grid);
 }
+
+int  special_char(char* l, ssize_t r)
+{
+
+	if (r == EOF)
+	{
+		printf("\n");
+		free(l);
+		exit(EXIT_SUCCESS);
+	}
+
+	if (0 == _strcmp(l,"\n"))
+		return(127);
+
+	return (0);
+}
