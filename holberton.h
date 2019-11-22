@@ -38,4 +38,6 @@ void free_grid(char **grid, int height);
 
 int printenv(char **env);
 
+int special_char(char* l, ssize_t r);
+
 #endif
