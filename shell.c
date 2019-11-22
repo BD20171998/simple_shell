@@ -5,7 +5,6 @@
  * main - Program that is simple UNIX command interpreter
  * Return: 0
  */
-extern char **environ;
 int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), char **env) 
 {
 	char *prompt = "##--->";
@@ -31,7 +30,12 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 				arg_num++;
 
 			if(_strcmp(args[0],"exit") == 0)
+			{
+				free(args);
+				free(line);
 				exit(EXIT_SUCCESS);
+			}
+
 			if(_strcmp(args[0], "env") == 0)
 				printenv(env);
 
@@ -43,9 +47,8 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 				else
 					wait (NULL);
 			}
-			free_grid(args, arg_num);
 			free(args);
 	}
-
+	free(line);
 	return (0);
 }
