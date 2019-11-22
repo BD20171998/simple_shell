@@ -1,11 +1,13 @@
 #include "holberton.h"
 #include <sys/wait.h>
 
+extern char **environ;
+
 /**
  * main - Program that is simple UNIX command interpreter
  * Return: 0
  */
-int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), char **env) 
+int main(void)
 {
 	char *prompt = "##--->";
 	char *line = NULL;
@@ -19,9 +21,13 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 	{
 			write(STDOUT_FILENO, prompt, 6);
 			read = getline(&line, &len, stdin);
-			if (read == EOF)
-				exit(EXIT_SUCCESS);
 
+			if (127 == special_char(line, read))
+				continue;
+
+			/*	if (read == EOF)
+				exit(EXIT_SUCCESS);
+			*/
 			no_nl(line);
 
 			args = parser(line);
@@ -37,15 +43,34 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 			}
 
 			if(_strcmp(args[0], "env") == 0)
-				printenv(env);
+				printenv(environ);
 
-			status = _path(args[0], args, env);
+			status = _path(args[0], args, environ);
+
 			if (status == 2)
 			{
 				if (access(args[0], X_OK) == 0)
-					execve(args[0], args, NULL);
+				{
+					if (fork() == 0)
+						execve(args[0], args, NULL);
+
+					else
+						wait (NULL);
+				}
+
 				else
-					wait (NULL);
+				{
+					if (fork() == 0)
+					{
+						perror(args[0]);
+						free(args);
+						free(line);
+						exit(127);
+					}
+
+					else
+						wait (NULL);
+				}
 			}
 			free(args);
 	}
