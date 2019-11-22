@@ -1,7 +1,4 @@
 #include "holberton.h"
-#include <sys/wait.h>
-
-extern char **environ;
 
 /**
  * main - Program that is simple UNIX command interpreter
@@ -25,9 +22,6 @@ int main(void)
 			if (127 == special_char(line, read))
 				continue;
 
-			/*	if (read == EOF)
-				exit(EXIT_SUCCESS);
-			*/
 			no_nl(line);
 
 			args = parser(line);
