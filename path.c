@@ -7,13 +7,14 @@
  */
 int _path(char *first, char **input, char **env)
 {
-	int token_len, first_len, i;
+	int token_len, first_len, i, exec;
 	char *temp, *left, *right, *token;
-	char *new = NULL;
+	char *new = NULL, *envcopy = NULL;
 
-	for (i = 0;env[i] !='\0'; i++)
+	for (i = 0; env[i] !='\0'; i++)
 	{
-		left = strtok(env[i], "=");
+		envcopy = _strdup(env[i]);
+		left = strtok(envcopy, "=");
 		temp = strtok(NULL, "=");
 
 		if (_strcmp(left, "PATH") == 0)
@@ -36,11 +37,11 @@ int _path(char *first, char **input, char **env)
 				if (access(new, X_OK) == 0)
 				{
 					if (fork() == 0)
-						execve(new, input, NULL);
+						exec = execve(new, input, NULL);
 					else
 						wait(NULL);
 					free(new);
-					return (0);
+					return (exec);
 				}
 				right = strtok(NULL, ":");
 				free(new);
@@ -49,5 +50,4 @@ int _path(char *first, char **input, char **env)
 
 	}
 	return (2);
-
 }
