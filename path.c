@@ -14,12 +14,12 @@ int _path(char *first, char **input, char **env)
 	for (i = 0; env[i] !='\0'; i++)
 	{
 		envcopy = _strdup(env[i]);
-		left = strtok(envcopy, "=");
-		temp = strtok(NULL, "=");
+		left = strtok(envcopy, "= \t");
+		temp = strtok(NULL, "= \t");
 
 		if (_strcmp(left, "PATH") == 0)
 		{
-			right = strtok(temp, ":");
+			right = strtok(temp, ": \t");
 			while (right)
 			{
 				token = right;
@@ -45,7 +45,7 @@ int _path(char *first, char **input, char **env)
 					free(envcopy);
 					return (0);
 				}
-				right = strtok(NULL, ":");
+				right = strtok(NULL, ": \t");
 				free(new);
 			}
 		}
