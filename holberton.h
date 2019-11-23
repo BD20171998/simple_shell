@@ -2,7 +2,6 @@
 #define HOLBERTON_H
 
 #define TRUE (1 == 1)
-#define FALSE (!TRUE)
 
 #include <stdlib.h>
 #include <stdio.h>
