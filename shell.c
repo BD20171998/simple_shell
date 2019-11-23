@@ -20,7 +20,7 @@ int main(int argc, char **argv, char **env)
 
 	while (read != EOF)
 	{
-		if (isatty(STDOUT_FILENO) == 1)
+		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, prompt, 6);
 
 			read = getline(&line, &len, stdin);
@@ -47,30 +47,7 @@ int main(int argc, char **argv, char **env)
 
 			status = _path(args[0], args, env);
 
-			if (status == 2)
-			{
-				if (access(args[0], X_OK) == 0)
-				{
-					if (fork() == 0)
-						execve(args[0], args, NULL);
-					else
-						wait(NULL);
-				}
-
-				else
-				{
-					if (fork() == 0)
-					{
-						perror(args[0]);
-						free(args);
-						free(line);
-						exit(127);
-					}
-					else
-						wait(NULL);
-				}
-			}
-			free(args);
+			_execute(status, line, args);
 	}
 	free(line);
 	return (0);
