@@ -55,22 +55,22 @@ char **parser(char *l)
 	int arg_num = 0, i = 0;
 
 	linecopy = _strdup(l);
-	parsed = strtok(linecopy, " ");
+	parsed = strtok(linecopy, " \t");
 
 	while (parsed != NULL)
 	{
 		arg_num++;
-		parsed = strtok(NULL, " ");
+		parsed = strtok(NULL, " \t");
 	}
 
 	args = malloc(sizeof(char *) * (arg_num + 1));
 
-	parsed2 = strtok(l, " ");
+	parsed2 = strtok(l, " \t");
 
 	while (parsed2 != NULL)
 	{
 		args[i] = parsed2;
-		parsed2 = strtok(NULL, " ");
+		parsed2 = strtok(NULL, " \t");
 		i++;
 	}
 
