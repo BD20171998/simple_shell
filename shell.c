@@ -4,7 +4,7 @@
  * main - Program that is simple UNIX command interpreter
  * Return: 0
  */
-int main(void)
+int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), char **env)
 {
 	char *prompt = "##--->";
 	char *line = NULL;
@@ -37,9 +37,9 @@ int main(void)
 			}
 
 			if(_strcmp(args[0], "env") == 0)
-				printenv(environ);
+				printenv(env);
 
-			status = _path(args[0], args, environ);
+			status = _path(args[0], args, env);
 
 			if (status == 2)
 			{
@@ -47,7 +47,6 @@ int main(void)
 				{
 					if (fork() == 0)
 						execve(args[0], args, NULL);
-
 					else
 						wait (NULL);
 				}
@@ -61,7 +60,6 @@ int main(void)
 						free(line);
 						exit(127);
 					}
-
 					else
 						wait (NULL);
 				}
