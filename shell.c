@@ -2,24 +2,30 @@
 
 /**
  * main - Program that is simple UNIX command interpreter
+ * @argc: argument count
+ * @argv: argument vector
+ * @env: the environment
  * Return: 0
  */
-int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), char **env)
+int main(int argc, char **argv, char **env)
 {
+	(void)argc, (void)**argv;
+
 	char *prompt = "##--->";
 	char *line = NULL;
-
 	char **args = NULL;
-	int arg_num = 0, i = 0, status = 0;
+	int i = 0, status = 0, arg_num = 0;
 	size_t len = 0;
 	ssize_t read = 0;
 
-	while(read != EOF)
+	while (read != EOF)
 	{
+		if (isatty(STDOUT_FILENO) == 1)
 			write(STDOUT_FILENO, prompt, 6);
+
 			read = getline(&line, &len, stdin);
 
-			if (127 == special_char(line, read))
+			if (special_char(line, read) == 127)
 				continue;
 
 			no_nl(line);
@@ -29,14 +35,14 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 			for (i = 0; args[i]; i++)
 				arg_num++;
 
-			if(_strcmp(args[0],"exit") == 0)
+			if (_strcmp(args[0], "exit") == 0)
 			{
 				free(args);
 				free(line);
 				exit(EXIT_SUCCESS);
 			}
 
-			if(_strcmp(args[0], "env") == 0)
+			if (_strcmp(args[0], "env") == 0)
 				printenv(env);
 
 			status = _path(args[0], args, env);
@@ -48,7 +54,7 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 					if (fork() == 0)
 						execve(args[0], args, NULL);
 					else
-						wait (NULL);
+						wait(NULL);
 				}
 
 				else
@@ -61,7 +67,7 @@ int main(int argc __attribute__((unused)),char **argv __attribute__((unused)), c
 						exit(127);
 					}
 					else
-						wait (NULL);
+						wait(NULL);
 				}
 			}
 			free(args);
