@@ -16,24 +16,26 @@ void free_grid(char **grid, int height)
 
 	free(grid);
 }
+
+
 /**
  * special_char - if the user types control d, it exits the shell and handles
  * the error when the user keeps on tabbing, it carries out the command
- * @r: the number of bytes read in from the user input
- * @l: the buffer
+ * @bytes: the number of bytes read in from the user input
+ * @buffer: the buffer
  * Return: Always (0) for succcess
  */
-int  special_char(char* l, ssize_t r)
+int  special_char(char *buffer, ssize_t bytes)
 {
 
-	if (r == EOF)
+	if (bytes == EOF)
 	{
 		_putchar('\n');
-		free(l);
+		free(buffer);
 		exit(EXIT_SUCCESS);
 	}
 
-	if (0 == _strcmp(l,"\n"))
+	if (0 == _strcmp(buffer,"\n"))
 		return(127);
 
 	return (0);
