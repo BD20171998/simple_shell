@@ -42,4 +42,6 @@ int special_char(char *buffer, ssize_t bytes);
 
 void _execute(int status, char *line, char **args);
 
+void builtins(char *line, char **args, char **env);
+
 #endif
