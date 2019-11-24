@@ -7,8 +7,8 @@
  */
 int _path(char *first, char **input, char **env)
 {
-	int token_len, first_len, i;
-	char *temp, *left, *right, *token;
+	int i;
+	char *temp, *left, *right;
 	char *new = NULL, *envcopy = NULL;
 
 	for (i = 0; env[i] !='\0'; i++)
@@ -22,19 +22,8 @@ int _path(char *first, char **input, char **env)
 			right = strtok(temp, ": \t");
 			while (right)
 			{
-				token = right;
-				token_len = _strlen(token);
-				first_len = _strlen(first);
+				new = pathstr(right, first);
 
-				new = malloc((token_len + first_len + 2) *
-					     sizeof(char));
-				if (new == NULL)
-					return (EOF);
-				new[0] = '\0';
-				_strcat(new, right);
-				_strcat(new, "/");
-				_strcat(new, first);
-				_strcat(new, "\0");
 				if (access(new, X_OK) == 0)
 				{
 					if (fork() == 0)
