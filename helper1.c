@@ -65,6 +65,9 @@ char **parser(char *l)
 
 	args = malloc(sizeof(char *) * (arg_num + 1));
 
+	if (args == NULL)
+		return (NULL);
+
 	parsed2 = strtok(l, " \t");
 
 	while (parsed2 != NULL)
