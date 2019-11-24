@@ -9,14 +9,13 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	(void)argc, (void)**argv;
-
 	char *prompt = "##--->";
 	char *line = NULL;
 	char **args = NULL;
 	int i = 0, status = 0, arg_num = 0;
 	size_t len = 0;
 	ssize_t read = 0;
+	(void)argc, (void)**argv;
 
 	while (read != EOF)
 	{
