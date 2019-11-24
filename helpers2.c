@@ -27,12 +27,12 @@ int _strcmp(char *s1, char *s2)
  */
 int _strlen(char *s)
 {
-        int l = 0;
+	int l = 0;
 
-        while (s[l] != '\0')
-                l++;
+	while (s[l] != '\0')
+		l++;
 
-        return (l);
+	return (l);
 }
 
 /**
@@ -42,7 +42,7 @@ int _strlen(char *s)
  */
 int _putchar(char c)
 {
-        return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 
