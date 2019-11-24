@@ -27,6 +27,7 @@ void free_grid(char **grid, int height)
  */
 int  special_char(char *buffer, ssize_t bytes)
 {
+	int i = 0;
 
 	if (bytes == EOF)
 	{
@@ -35,10 +36,18 @@ int  special_char(char *buffer, ssize_t bytes)
 		exit(EXIT_SUCCESS);
 	}
 
-	if (_strcmp(buffer, "\n") == 0)
+	if (0 == _strcmp(buffer,"\n"))
 		return (127);
 
-	return (0);
+	while (buffer[i] != '\n')
+	{
+		if (buffer[i] != ' ' && buffer[i] != '\t')
+			return (0);
+
+		++i;
+	}
+
+	return (127);
 }
 
 /**
