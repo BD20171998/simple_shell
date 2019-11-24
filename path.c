@@ -11,7 +11,7 @@ int _path(char *first, char **input, char **env)
 	char *temp, *left, *right;
 	char *new = NULL, *envcopy = NULL;
 
-	for (i = 0; env[i] !='\0'; i++)
+	for (i = 0; env[i] != '\0'; i++)
 	{
 		envcopy = _strdup(env[i]);
 		left = strtok(envcopy, "= \t");
