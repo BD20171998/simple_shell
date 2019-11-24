@@ -43,4 +43,6 @@ void _execute(int status, char *line, char **args);
 
 void builtins(char *line, char **args, char **env);
 
+char *pathstr(char *right, char *first);
+
 #endif
