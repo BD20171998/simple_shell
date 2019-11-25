@@ -5,7 +5,7 @@
  * @env: environment
  * Return: 0 if successful
  */
-int _path(char *first, char **input, char **env)
+int _path(char *first, char **input, char **env, int *ex_st)
 {
 	int i;
 	char *temp, *left, *right;
@@ -28,8 +28,10 @@ int _path(char *first, char **input, char **env)
 				{
 					if (fork() == 0)
 						execve(new, input, NULL);
+
 					else
 						wait(NULL);
+					*ex_st = 0;
 					free(new);
 					free(envcopy);
 					return (0);
