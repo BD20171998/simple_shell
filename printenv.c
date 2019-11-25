@@ -5,7 +5,7 @@
  * @env: the environment variable to print
  * Return: Always (0) for sucess
  */
-int printenv(char **env)
+int printenv(char **env, int *ex_st)
 {
 	unsigned int i = 0;
 
@@ -15,6 +15,6 @@ int printenv(char **env)
 		_putchar('\n');
 		i++;
 	}
-
+	*ex_st = 0;
 	return (0);
 }
