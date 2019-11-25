@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
 	char *line = NULL;
 	char **args = NULL;
 	int i = 0, status = 0, arg_num = 0;
-	static int exit_stat;
+	static int exit_stat, tally;
 	size_t len = 0;
 	ssize_t read = 0;
 	(void)argc, (void)**argv;
@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **env)
 			write(STDOUT_FILENO, prompt, 6);
 
 			read = getline(&line, &len, stdin);
-
+			++tally;
 			if (special_char(line, read, &exit_stat) == 127)
 				continue;
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **env)
 
 			status = _path(args[0], args, env, &exit_stat);
 
-			_execute(status, args, &exit_stat);
+			_execute(status, args, &exit_stat, &tally);
 
 			fflush(stdin);
 	}
