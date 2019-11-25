@@ -2,7 +2,7 @@
 
 ### Description
 
-Simple shell is a simple UNIX command interpreter written entirely in C. The
+The Simple Shell is a simple UNIX command interpreter written entirely in C. The
 program runs based on bash commands obtained from the input stream by the user.
 Any text seperated by a single space is considered to be an argument. The
 respective command typed by the user is then executed as if in a UNIX shell.
@@ -17,6 +17,12 @@ respective command typed by the user is then executed as if in a UNIX shell.
 * No more than 5 functions per file
 * All header files should be include guarded
 * System calls are only used when needed
+
+### Compilation
+
+```bash
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+```
 
 ### List of Allowed Functions & System Calls
 
@@ -51,25 +57,51 @@ respective command typed by the user is then executed as if in a UNIX shell.
 * wait4 (man 2 wait4)
 * write (man 2 write)
 
-### How Does it Work
+### Usage 
 
-The program first prints the shell prompt and awaits the user's input. The input
-is then parsed into seperate arguments using a single space as a delimiter.
-Built-ins such as **env** and **exit** are handled seperately (see below) when
-the user inputs such commands.
+The shell works like this in interactive mode:
 
-The new line character is removed via the **no_nl** function described in the
-*functions* section below.
+```bash
+$ ./hsh
+##---> /bin/ls
+hsh shell.c path.c README.md
+```
 
-After the input has been checked for built-ins and potential keystroke errors
-from the input stream, a child process is created via the **fork** function. The
-user's arguments are passed to **execve** and the command is then executed if the
-command exists. Once the command executes if found, the child process ends with
-the exit function.
+```bash
+##---> ls -l
+-rwxrwxr-x 1 vagrant vagrant 14136 Nov 24 21:42 hsh
+-rw-rw-r-- 1 vagrant vagrant   863 Nov 24 21:42 shell.c
+-rw-rw-r-- 1 vagrant vagrant   784 Nov 24 01:02 path.c
+-rw-rw-r-- 1 vagrant vagrant  1449 Nov 22 23:48 README.md
+```
 
-Once the user exits the shell via the built-in **exit** or enters the end of file
-value with **(Ctrl+D)** the program frees the remaining memory allocated during
-the course of its run and exits.
+```bash
+##---> pwd
+/home/vagrant/simple_shell
+```
+
+```bash
+##---> exit
+$
+```
+
+
+
+The shell works like this in non-interactive mode:
+
+```bash
+$ echo "/bin/ls" | ./hsh
+hsh shell.c path.c README.md test_ls
+$
+$ cat test_ls
+/bin/ls
+/bin/ls
+$
+$ cat test_ls | ./hsh
+hsh shell.c path.c README.md test_ls
+hsh shell.c path.c README.md test_ls
+$
+```
 
 ### Built-Ins
 
@@ -80,6 +112,10 @@ The simple shell has support for the following built-in commands:
 | env                 | Prints the environment                                                                                  
 | exit                | Exits the shell                                                                    
 
+
+### Flowchart
+
+![Image of Flowchart](Image Link of Flowchart goes here)
 
 ### Authors
 
