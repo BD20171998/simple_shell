@@ -3,8 +3,8 @@
 /**
  * _execute - function that executes in the main shell
  * @status: the status of the path, whether the file found is executable or not
- * @line: the buffer
  * @args: the parsed arguments
+ * @ex_st: the exit status
  * Return: void
  */
 void _execute(int status, char **args, int *ex_st)
