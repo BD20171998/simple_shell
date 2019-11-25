@@ -3,6 +3,9 @@
 /**
  * _path - function that prints environment PATH
  * @env: environment
+ * @first: the first tokenized word, "PATH ="
+ * @input: the tokenized input after PATH
+ * @ex_st: the exit status
  * Return: 0 if successful
  */
 int _path(char *first, char **input, char **env, int *ex_st)
