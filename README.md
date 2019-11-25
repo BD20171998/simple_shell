@@ -1,3 +1,5 @@
+![Holberton Logo](https://camo.githubusercontent.com/64c35dd60391e2c90277729276aa86cc921b0ad2/68747470733a2f2f692e6962622e636f2f546b32425a79542f776f72646d61726b2d63686572727937322e706e67)
+
 ## Simple Shell
 
 ### Synopsis
