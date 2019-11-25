@@ -61,6 +61,45 @@ char *pathstr(char *right, char *first)
 	return (new);
 }
 
+/**
+ * print_int - prints an integer
+ * @tally: pointer to the tally number
+ * Return: void
+ */
+void print_int(int *tally)
+{
+	int count = 0, length = 0, j, n;
+	unsigned int base = 1, d, max;
+
+	n = *tally;
+
+	max = n;
+	d = max;
+
+	do {
+		d /= 10;
+		++length;
+	} while (d != 0);
+
+	count += length;
+
+	for (j = 0; j < length -  1; j++)
+		base = base * 10;
+
+	_putchar('0' + (max / base));
+
+	if (length > 1)
+	{
+		for (j = 0; j < length - 2; j++)
+		{
+			base /= 10;
+			d = max / base;
+			_putchar('0' + d % 10);
+		}
+		_putchar('0' + (max % 10));
+	}
+}
+
 
 /**
  * parser - function that takes a string from the command line and returns the
@@ -106,48 +145,4 @@ char **parser(char *l)
 	args[i] = NULL;
 	free(linecopy);
 	return (args);
-}
-
-
-/**
- * special_char - if the user types control d, it exits the shell and handles
- * the error when the user keeps on tabbing, it carries out the command
- * @bytes: the number of bytes read in from the user input
- * @buffer: the buffer
- * @ex_st: the exit status
- * Return: Always (0) for succcess
- */
-int  special_char(char *buffer, ssize_t bytes, int *ex_st)
-{
-	int i = 0;
-
-	if (bytes == EOF && isatty(STDIN_FILENO) == 1)
-	{
-		_putchar('\n');
-		free(buffer);
-		exit(*ex_st);
-	}
-
-	if (bytes == EOF && isatty(STDIN_FILENO) == 0)
-	{
-		free(buffer);
-		exit(*ex_st);
-	}
-
-	if (_strcmp(buffer, "\n") == 0)
-	{
-		*ex_st = 127;
-		return (127);
-	}
-
-	while (buffer[i] != '\n')
-	{
-		if (buffer[i] != ' ' && buffer[i] != '\t')
-			return (0);
-
-		++i;
-	}
-
-	*ex_st = 127;
-	return (127);
 }
