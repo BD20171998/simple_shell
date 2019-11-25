@@ -23,6 +23,7 @@ void free_grid(char **grid, int height)
  * the error when the user keeps on tabbing, it carries out the command
  * @bytes: the number of bytes read in from the user input
  * @buffer: the buffer
+ * @ex_st: the exit status
  * Return: Always (0) for succcess
  */
 int  special_char(char *buffer, ssize_t bytes, int *ex_st)
