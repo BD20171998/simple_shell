@@ -57,7 +57,7 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 * wait4 (man 2 wait4)
 * write (man 2 write)
 
-### Usage 
+### Usage
 
 The shell works like this in interactive mode:
 
@@ -109,8 +109,8 @@ The simple shell has support for the following built-in commands:
 
 | Command             | Definition                                                                                |
 | ------------------- | --------------------------------------------------------------------------------
-| env                 | Prints the environment                                                                                  
-| exit                | Exits the shell                                                                    
+| env                 | Prints the environment
+| exit                | Exits the shell
 
 
 ### Flowchart
