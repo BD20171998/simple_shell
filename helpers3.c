@@ -25,7 +25,7 @@ void free_grid(char **grid, int height)
  * @buffer: the buffer
  * Return: Always (0) for succcess
  */
-int  special_char(char *buffer, ssize_t bytes)
+int  special_char(char *buffer, ssize_t bytes, int *ex_st)
 {
 	int i = 0;
 
@@ -33,11 +33,14 @@ int  special_char(char *buffer, ssize_t bytes)
 	{
 		_putchar('\n');
 		free(buffer);
-		exit(EXIT_SUCCESS);
+		exit(*ex_st);
 	}
 
 	if (0 == _strcmp(buffer,"\n"))
+	{
+		*ex_st = 127;
 		return (127);
+	}
 
 	while (buffer[i] != '\n')
 	{
@@ -47,6 +50,7 @@ int  special_char(char *buffer, ssize_t bytes)
 		++i;
 	}
 
+	*ex_st = 127;
 	return (127);
 }
 
