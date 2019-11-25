@@ -39,10 +39,12 @@ int printenv(char **env, int *ex_st);
 
 int special_char(char *buffer, ssize_t bytes, int *ex_st);
 
-void _execute(int status, char **args, int *ex_st);
+void _execute(int status, char **args, int *ex_st, int *tal);
 
 void builtins(char *line, char **args, char **env, int *ex_st);
 
 char *pathstr(char *right, char *first);
+
+void print_int(int *tal);
 
 #endif
