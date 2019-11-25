@@ -36,7 +36,7 @@ int  special_char(char *buffer, ssize_t bytes, int *ex_st)
 		exit(*ex_st);
 	}
 
-	if (0 == _strcmp(buffer,"\n"))
+	if (_strcmp(buffer, "\n") == 0)
 	{
 		*ex_st = 127;
 		return (127);
