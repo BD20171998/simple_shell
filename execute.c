@@ -9,7 +9,6 @@
  */
 void _execute(int status, char **args, int *ex_st)
 {
-
 	if (status == 2)
 	{
 		if (access(args[0], X_OK) == 0)
@@ -21,18 +20,16 @@ void _execute(int status, char **args, int *ex_st)
 				wait(NULL);
 			*ex_st = 0;
 		}
-
 		else if (access(args[0], F_OK) != 0)
 		{
-				perror(args[0]);
-				*ex_st = 127;
+			perror(args[0]);
+			*ex_st = 127;
 		}
-
 		else if (access(args[0], F_OK) == 0 &&
 			 access(args[0], X_OK) != 0)
 		{
-				perror(args[0]);
-				*ex_st = 126;
+			perror(args[0]);
+			*ex_st = 126;
 		}
 	}
 	free(args);
