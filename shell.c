@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env)
 	char *prompt = "##--->";
 	char *line = NULL;
 	char **args = NULL;
-	int i = 0, status = 0, arg_num = 0, tally = 0;
+	int i = 0, status = 0, arg_num = 0;
 	static int exit_stat;
 	size_t len = 0;
 	ssize_t read = 0;
@@ -24,8 +24,6 @@ int main(int argc, char **argv, char **env)
 			write(STDOUT_FILENO, prompt, 6);
 
 			read = getline(&line, &len, stdin);
-
-			++tally;
 
 			if (special_char(line, read, &exit_stat) == 127)
 				continue;
