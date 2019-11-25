@@ -30,9 +30,15 @@ int  special_char(char *buffer, ssize_t bytes, int *ex_st)
 {
 	int i = 0;
 
-	if (bytes == EOF)
+	if (bytes == EOF && isatty(STDIN_FILENO) == 1)
 	{
 		_putchar('\n');
+		free(buffer);
+		exit(*ex_st);
+	}
+
+	if (bytes == EOF && isatty(STDIN_FILENO) == 0)
+	{
 		free(buffer);
 		exit(*ex_st);
 	}
