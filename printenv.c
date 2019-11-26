@@ -3,7 +3,7 @@
 /**
  * printenv - prints the environment variable
  * @env: the environment variable to print
- * @ex_st: the exit status
+ * @ex_st: exit status
  * Return: Always (0) for sucess
  */
 int printenv(char **env, int *ex_st)
@@ -17,5 +17,5 @@ int printenv(char **env, int *ex_st)
 		i++;
 	}
 	*ex_st = 0;
-	return (0);
+	return (EXIT_SUCCESS);
 }
