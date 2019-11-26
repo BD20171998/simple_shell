@@ -68,7 +68,7 @@ int  special_char(char *buffer, ssize_t bytes, int *ex_st)
 
 	if (_strcmp(buffer, "\n") == 0)
 	{
-		*ex_st = 127;
+		*ex_st = 0;
 		return (127);
 	}
 
@@ -80,6 +80,6 @@ int  special_char(char *buffer, ssize_t bytes, int *ex_st)
 		++i;
 	}
 
-	*ex_st = 127;
+	*ex_st = 0;
 	return (127);
 }
