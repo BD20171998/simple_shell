@@ -23,25 +23,25 @@ int main(int argc, char **argv, char **env)
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, prompt, 6);
 
-			read = getline(&line, &len, stdin);
-			++tally;
-			if (special_char(line, read, &exit_stat) == 127)
-				continue;
+		read = getline(&line, &len, stdin);
+		++tally;
+		if (special_char(line, read, &exit_stat) == 127)
+			continue;
 
-			no_nl(line);
+		no_nl(line);
 
-			args = parser(line);
+		args = parser(line);
 
-			for (i = 0; args[i]; i++)
-				arg_num++;
+		for (i = 0; args[i]; i++)
+			arg_num++;
 
-			builtins(line, args, env, &exit_stat);
+		builtins(line, args, env, &exit_stat);
 
-			status = _path(args[0], args, env, &exit_stat);
+		status = _path(args[0], args, env, &exit_stat);
 
-			_execute(status, args, &exit_stat, &tally);
+		_execute(status, args, &exit_stat, &tally);
 
-			fflush(stdin);
+		fflush(stdin);
 	}
 	free(line);
 	return (0);
