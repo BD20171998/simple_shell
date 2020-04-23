@@ -15,7 +15,7 @@ void builtins(char *line, char **args, char **env, int *ex_st)
 	{
 		free(args);
 		free(line);
-		exit(EXIT_FAILURE);
+		exit(ex_st);
 	}
 
 	if (_strcmp(args[0], "env") == 0)
